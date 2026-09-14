@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+
+<title>HACOM Homepage Demo</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#f5f5f5;
+    font-family:Arial,sans-serif;
+}
+
+.page-wrapper{
+    width:100%;
+}
+
+.block{
+    width:100%;
+    padding:24px 0;
+}
+
+.block-title{
+    width:1440px;
+    margin:0 auto 10px;
+    font-size:14px;
+    font-weight:700;
+    color:#666;
+}
+
+.block-inner{
+    width:1440px;
+    margin:0 auto;
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    position:relative;
+}
+
+.single-image img{
+    width:100%;
+    height:auto;
+    display:block;
+}
+
+.slider{
+    display:flex;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-behavior:smooth;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+    align-items:flex-start;
+    transition:height 0.25s ease;
+}
+
+.slider::-webkit-scrollbar{
+    display:none;
+}
+
+.slider img{
+    width:100%;
+    min-width:100%;
+    height:auto;
+    flex-shrink:0;
+    display:block;
+    scroll-snap-align:start;
+}
+/* =========================
+   BLOCK 21 - FOOTER
+========================= */
+
+.footer-slider{
+    display:flex;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-behavior:smooth;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+    align-items:flex-start;
+    transition:height 0.25s ease;
+}
+
+.footer-slider::-webkit-scrollbar{
+    display:none;
+}
+
+.footer-slider img{
+    min-width:100%;
+    width:100%;
+    height:auto;
+    display:block;
+    flex-shrink:0;
+    scroll-snap-align:start;
+}
+
+.nav-btn{
+
+    position:absolute;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:48px;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(0,0,0,.55);
+
+    color:#fff;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    z-index:99;
+
+}
+.block-21 .nav-btn{
+    top:33%;
+    transform:translateY(-50%);
+}
+
+.prev-btn{
+    left:15px;
+}
+
+.next-btn{
+    right:15px;
+}
+
+.nav-btn:hover{
+    background:rgba(0,0,0,.8);
+}
+
+.block-21 .slider img{
+    flex:0 0 1181px;
+    width:1181px;
+    min-width:1181px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="page-wrapper" id="homepage"></div>
+
+<script>
+
+/* =====================================
+   CHỈ CẦN THÊM ẢNH TẠI ĐÂY
+===================================== */
+
+const blocks = {
+
+    1:[
+        "https://drive.google.com/thumbnail?id=1n35sEeqEX_Kg3K1gDf82j-qQYo9yMxcA&sz=w3000",
+        "https://drive.google.com/thumbnail?id=17Bys6cdnpVd6SaOKgUdXWZX6xdjWe7x4&sz=w3000",
+	"https://drive.google.com/thumbnail?id=12ptUgtHOGztOKStHMP0IeuJA_4uwiJy8&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1tZX6DWc0CLFzHgY96gCrQ8lVcGVZDXoZ&sz=w3000",
+	"https://drive.google.com/thumbnail?id=16mLlES4avPbfAKYZRaUA9sMwHKsQiRFq&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1H2X9mMc7uKx2T-9-86HeP-eUBTOzlKL9&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1dknCbtwudi_28mdY2o-LsN6xExa6oFcd&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1CeDIG-GuczIGNaXKWzx6vIX6OTOXvWm4&sz=w3000"
+    ],
+
+    2:[
+        "https://drive.google.com/thumbnail?id=1Cw8x8icG_qT_I0VszIsE5kJtPo6WbmKk&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1-30fclt6_jTc1sJpw1nPVBFd0ycdfMc8&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1W73bm_eOr-38Ei3W-Xnkhfw8Iadjy8N9&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1PrmA_RfOWE6MEqVxk7an_ZYf1sB3kCr5&sz=w3000"
+    ],
+
+    3:[
+        "https://drive.google.com/thumbnail?id=1TKZpmxtlFsCEePLihaIsdrry3h5EpG9I&sz=w3000",
+        "https://drive.google.com/thumbnail?id=1tcBuJYrN3om6BbtcUbudhKP7HJB33C_8&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1YnFWfiAQXJfCMf9UQqNGBFvG6zTljNSK&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1dBfu0zpAfB-Y5rhIRm1NdVsw3f7OslHw&sz=w3000"
+    ],
+
+    4:[
+        "https://drive.google.com/thumbnail?id=1GXwrVdo5ruSThcdIs2SVUhisq-bfVrd6&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1D_uRRVI7hngElEad0uo4rAz23CEGLosW&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1lgG1qPUSdgGjTzMq0ysWeOkwwhlxeouq&sz=w3000"
+    ],
+
+    5:[
+        "https://drive.google.com/thumbnail?id=1aQBQcN-NjAPwNpNrZf2hj47qV_NV5-Sh&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1Wsf069qHxjQYDGENSSvlUcuPlxV05mQo&sz=w3000"
+    ],
+
+    6:[
+        "https://drive.google.com/thumbnail?id=1PawNaL_UbIkvuCd2p4SClPowJvmjPC5J&sz=w3000"
+    ],
+
+    7:[
+        "https://drive.google.com/thumbnail?id=1wha9EqhMYV7tC0fRiZHHKZD8vLHhtta3&sz=w3000",
+	"https://drive.google.com/thumbnail?id=14u9YVSEDCNWgnxY3OwESakb_qg9yTvMu&sz=w3000"
+    ],
+
+    8:[
+        "https://drive.google.com/thumbnail?id=1sOg52BJ9hrSWe92ZluPwbhSaKUFSVwaa&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1pycYNYEjobd095zF5uGx6_fry1emerBZ&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1kLAgEAu3san6xlh-1n_XOxYHoZeZb4jm&sz=w3000"
+    ],
+
+    9:[
+        "https://drive.google.com/thumbnail?id=1wTOjqYNJvOu4eOzBFTrXVDdntz5B4iI-&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1UtEx9_wI0GoHY7E9rc7VeGvHXxoqqZZM&sz=w3000"
+    ],
+
+    10:[
+        "https://drive.google.com/thumbnail?id=11HCVp72qFzyTLihVd5xLqc-7t-zQTc9s&sz=w3000",
+	"https://drive.google.com/thumbnail?id=13kMCTK7YbtFOSPa3QH9ZMz4lhb7ryVK0&sz=w3000"
+    ],
+
+    11:[
+        "https://drive.google.com/thumbnail?id=1gDaXDuSA6FOZltxS_nzTaVTDjKaUFT0C&sz=w3000"
+    ],
+
+    12:[
+        "https://drive.google.com/thumbnail?id=14mgg4V8O8mdAl30uZ1SSBL03AVJQs6YK&sz=w3000"
+    ],
+
+    13:[
+        "https://drive.google.com/thumbnail?id=15qmE-XNF3Q6gepr39sIY8StMcnuZ8Z4k&sz=w3000"
+    ],
+
+    14:[
+        "https://drive.google.com/thumbnail?id=1ToS9m_2soGknQP5SD_eNFJZe2gbejSSy&sz=w3000"
+    ],
+
+    15:[
+        "https://drive.google.com/thumbnail?id=1MxgkWRWvybPHUb9Xv8LN8BPxo0Kxri8j&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1MZIyKZub1MOxVxRBCRJ4PuxogEb_YwUi&sz=w3000"
+    ],
+
+    16:[
+        "https://drive.google.com/thumbnail?id=1XIYdYGuhI2K3GrLVQVUACVVqJPtk7R4C&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1Bol5lR3C_UMdKs8Twz3dngPx6rRuzl1I&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1ZbF41O-jzNb2ig6SIB6wMt8wJxC5hUmU&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1UTESj4A0salqJIyX-Q3ZkMbPtfwSBF7R&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1T2Xeq6bV5cs1V8WHl22w3HE60gubGaYk&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1ISTKXPGtnlOr3tz4H81czbIEUSBc0UYU&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1yzrIDUcA_Prv9bqf2a8fhNNtGTBn2bob&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1zWf6b88pwPwQPEwB66gfWRCTofAb9NGi&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1uBalz2ptO0bMY76jynCJD86lqpPk-Zne&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1Lc89mCX4-T2DpvSGev-xLfNpAn-QZG5l&sz=w3000"
+    ],
+
+    17:[
+        "https://drive.google.com/thumbnail?id=1X1vHct3qHElW4cKU_byrpEOL8qOH5Ogy&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1fGjChgSkunO62j1RPD1tG8biERp6iRQS&sz=w3000"
+    ],
+
+    18:[
+        "https://drive.google.com/thumbnail?id=1-Vl2rktUsfb1EmL3na8kyrpbe_QG7ggz&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1oXfLplWZ_GXOix0AJMVnrEopI-9bEM1S&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1YP5ru55T3Owpl_8oJhgQ1w8O-k6ZyTXC&sz=w3000"
+    ],
+
+    19:[
+        "https://drive.google.com/thumbnail?id=1v1baIYf6mYkiHNHMxTUgPDoDrS4hIgfy&sz=w3000"
+    ],
+
+    20:[
+        "https://drive.google.com/thumbnail?id=1JW_MmucsDp-gvkYqRomNGMEWYhe7GrDE&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1F6MOBnDjhiPtcPH0W6AC3vOBVB4oNcW0&sz=w3000"
+    ],
+
+    21:[
+        "https://drive.google.com/thumbnail?id=1u6M_IvbVvIq6c3h4v23salphbJP4Lpph&sz=w3000",
+	"https://drive.google.com/thumbnail?id=161NLntgPCSr_GOc-9F_AbOfseR63nCcU&sz=w3000",
+	"https://drive.google.com/thumbnail?id=16knVry_rugG01hpc9Nyevco4B6eRqwjc&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1DKDOFtfsn8zGXIy9U7VOWJw2cWTLxpcy&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1hm927Va269Kd-dfjNpXeorWHUfTgOOXv&sz=w3000",
+	"https://drive.google.com/thumbnail?id=1xiMHmN96IhXZ76ZRa-qYHDY8JFcRfiie&sz=w3000"
+    ]
+};
+
+/* =====================================
+   AUTO RENDER
+===================================== */
+
+// Tự động tối ưu link Google Drive sang CDN trực tiếp lh3 và giữ nguyên kích thước chất lượng gốc (sz=w3000 hoặc s0)
+function formatImageUrl(url) {
+    if (!url) return '';
+    const match = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    if (match && match[1]) {
+        const szMatch = url.match(/[?&]sz=([a-zA-Z0-9_-]+)/);
+        const sz = szMatch ? szMatch[1] : 's0';
+        return `https://lh3.googleusercontent.com/d/${match[1]}=${sz}`;
+    }
+    return url;
+}
+
+const homepage = document.getElementById('homepage');
+let allHtml = '';
+
+Object.keys(blocks).forEach(blockId => {
+
+    const images = blocks[blockId];
+
+    let html = '';
+
+    html += `
+        <div class="block">
+
+            <div class="block-title">
+                BLOCK ${String(blockId).padStart(2,'0')}
+            </div>
+
+            <div class="block-inner ${blockId == 21 ? 'block-21' : ''}">
+    `;
+
+    if(images.length === 1){
+        const imgSrc = formatImageUrl(images[0]);
+        html += `
+            <div class="single-image">
+                <img src="${imgSrc}" loading="lazy" referrerpolicy="no-referrer" alt="BLOCK ${String(blockId).padStart(2,'0')}">
+            </div>
+        `;
+
+    }else{
+
+        html += `
+
+            <button
+                class="nav-btn prev-btn"
+                onclick="slidePrev('slider-${blockId}')">
+                ◀
+            </button>
+
+	<div
+   	 class="${blockId == 21 ? 'footer-slider' : 'slider'}"
+ 	 id="slider-${blockId}">
+        `;
+
+        images.forEach((img, idx) => {
+            const imgSrc = formatImageUrl(img);
+            html += `
+                <img src="${imgSrc}" loading="lazy" referrerpolicy="no-referrer" alt="BLOCK ${String(blockId).padStart(2,'0')} - ${idx + 1}">
+            `;
+        });
+
+        html += `
+            </div>
+
+            <button
+                class="nav-btn next-btn"
+                onclick="slideNext('slider-${blockId}')">
+                ▶
+            </button>
+        `;
+    }
+
+    html += `
+            </div>
+
+        </div>
+    `;
+
+    allHtml += html;
+
+});
+
+homepage.innerHTML = allHtml;
+
+/* =====================================
+   TỰ ĐỘNG CĂN CHỈNH CHIỀU CAO (XÓA KHOẢNG TRẮNG DƯ THỪA)
+===================================== */
+
+function updateSliderHeight(slider) {
+    if (!slider) return;
+    const width = slider.offsetWidth || 1440;
+    const index = Math.round(slider.scrollLeft / width);
+    const imgs = slider.querySelectorAll('img');
+    const currentImg = imgs[index];
+    if (currentImg) {
+        if (currentImg.offsetHeight > 0) {
+            slider.style.height = currentImg.offsetHeight + 'px';
+        } else if (currentImg.naturalWidth && currentImg.naturalHeight) {
+            slider.style.height = Math.round(width * currentImg.naturalHeight / currentImg.naturalWidth) + 'px';
+        }
+    }
+}
+
+// Lắng nghe sự kiện tải ảnh và cuộn trang để cập nhật đúng chiều cao theo ảnh đang xem
+document.querySelectorAll('.slider, .footer-slider').forEach(slider => {
+    slider.querySelectorAll('img').forEach((img, idx) => {
+        img.addEventListener('load', () => {
+            const width = slider.offsetWidth || 1440;
+            const activeIdx = Math.round(slider.scrollLeft / width);
+            if (activeIdx === idx || !slider.style.height) {
+                updateSliderHeight(slider);
+            }
+        });
+    });
+
+    let scrollTimeout;
+    slider.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            updateSliderHeight(slider);
+        }, 50);
+    }, { passive: true });
+
+    // Khởi tạo chiều cao ban đầu
+    updateSliderHeight(slider);
+});
+
+window.addEventListener('resize', () => {
+    document.querySelectorAll('.slider, .footer-slider').forEach(updateSliderHeight);
+});
+
+/* =====================================
+   NEXT / PREV
+===================================== */
+
+function slideNext(id){
+    const slider = document.getElementById(id);
+    if (!slider) return;
+    const width = slider.offsetWidth || 1440;
+    const nextScroll = slider.scrollLeft + width;
+    const nextIndex = Math.round(nextScroll / width);
+    const imgs = slider.querySelectorAll('img');
+    if (nextIndex < imgs.length && imgs[nextIndex]) {
+        const img = imgs[nextIndex];
+        if (img.offsetHeight > 0) {
+            slider.style.height = img.offsetHeight + 'px';
+        } else if (img.naturalWidth && img.naturalHeight) {
+            slider.style.height = Math.round(width * img.naturalHeight / img.naturalWidth) + 'px';
+        }
+    }
+    slider.scrollBy({
+        left: width,
+        behavior: 'smooth'
+    });
+}
+
+function slidePrev(id){
+    const slider = document.getElementById(id);
+    if (!slider) return;
+    const width = slider.offsetWidth || 1440;
+    const prevScroll = Math.max(0, slider.scrollLeft - width);
+    const prevIndex = Math.round(prevScroll / width);
+    const imgs = slider.querySelectorAll('img');
+    if (imgs[prevIndex]) {
+        const img = imgs[prevIndex];
+        if (img.offsetHeight > 0) {
+            slider.style.height = img.offsetHeight + 'px';
+        } else if (img.naturalWidth && img.naturalHeight) {
+            slider.style.height = Math.round(width * img.naturalHeight / img.naturalWidth) + 'px';
+        }
+    }
+    slider.scrollBy({
+        left: -width,
+        behavior: 'smooth'
+    });
+}
+
+</script>
+
+</body>
+</html>
