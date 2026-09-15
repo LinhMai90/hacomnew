@@ -17,7 +17,8 @@
     box-sizing:border-box;
 }
 
-body{
+body
+{
     background:#f5f5f5;
     font-family:Arial,sans-serif;
 }
@@ -40,7 +41,7 @@ body{
 }
 
 .block-inner{
-    width: 1920px;px;
+    width: 1920px;
     margin:0 auto;
     background:#fff;
     border-radius:12px;
@@ -393,7 +394,7 @@ homepage.innerHTML = allHtml;
 
 function updateSliderHeight(slider) {
     if (!slider) return;
-    const width = slider.offsetWidth || 1920px;
+    const width = slider.offsetWidth || 1920;
     const index = Math.round(slider.scrollLeft / width);
     const imgs = slider.querySelectorAll('img');
     const currentImg = imgs[index];
