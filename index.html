@@ -33,7 +33,7 @@ body
 }
 
 .block-title{
-    width:1900px;
+    width:1882px;
     margin:0 auto 10px;
     font-size:14px;
     font-weight:700;
@@ -41,7 +41,7 @@ body
 }
 
 .block-inner{
-    width: 1900px;
+    width: 1882px;
     margin:0 auto;
     background:#fff;
     border-radius:12px;
@@ -439,7 +439,7 @@ homepage.innerHTML = allHtml;
 
 function updateSliderHeight(slider) {
     if (!slider) return;
-    const width = slider.offsetWidth || 1900;
+    const width = slider.offsetWidth || 1882;
     const index = Math.round(slider.scrollLeft / width);
     const imgs = slider.querySelectorAll('img');
     const currentImg = imgs[index];
@@ -456,7 +456,7 @@ function updateSliderHeight(slider) {
 document.querySelectorAll('.slider, .footer-slider').forEach(slider => {
     slider.querySelectorAll('img').forEach((img, idx) => {
         img.addEventListener('load', () => {
-            const width = slider.offsetWidth || 1900;
+            const width = slider.offsetWidth || 1882;
             const activeIdx = Math.round(slider.scrollLeft / width);
             if (activeIdx === idx || !slider.style.height) {
                 updateSliderHeight(slider);
@@ -487,7 +487,7 @@ window.addEventListener('resize', () => {
 function slideNext(id){
     const slider = document.getElementById(id);
     if (!slider) return;
-    const width = slider.offsetWidth || 1900;
+    const width = slider.offsetWidth || 1882;
     const nextScroll = slider.scrollLeft + width;
     const nextIndex = Math.round(nextScroll / width);
     const imgs = slider.querySelectorAll('img');
@@ -508,7 +508,7 @@ function slideNext(id){
 function slidePrev(id){
     const slider = document.getElementById(id);
     if (!slider) return;
-    const width = slider.offsetWidth || 1900;
+    const width = slider.offsetWidth || 1882;
     const prevScroll = Math.max(0, slider.scrollLeft - width);
     const prevIndex = Math.round(prevScroll / width);
     const imgs = slider.querySelectorAll('img');
